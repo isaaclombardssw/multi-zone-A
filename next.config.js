@@ -4,30 +4,33 @@ const { BLOG_URL } = process.env;
 const nextConfig = {
   trailingSlash: false,
   async rewrites() {
+    // Remove trailing slash from BLOG_URL to prevent double slashes
+    const blogURL = BLOG_URL?.replace(/\/$/, '') || '';
+    
     return [
       {
         source: "/blog",
-        destination: `${BLOG_URL}/blog`,
+        destination: `${blogURL}/blog`,
       },
       {
         source: "/blog/",
-        destination: `${BLOG_URL}/blog`,
+        destination: `${blogURL}/blog`,
       },
       {
         source: "/blog/:path+",
-        destination: `${BLOG_URL}/blog/:path+`,
+        destination: `${blogURL}/blog/:path+`,
       },
       {
         source: "/blog-static/_next/:path+",
-        destination: `${BLOG_URL}/blog-static/_next/:path+`,
+        destination: `${blogURL}/blog-static/_next/:path+`,
       },
       {
         source: "/blog-live-editor",
-        destination: `${BLOG_URL}/admin/index.html`,
+        destination: `${blogURL}/admin/index.html`,
       },
       {
         source: "/blog-live-editor/:path*",
-        destination: `${BLOG_URL}/admin/index.html/#/~/:path*`,
+        destination: `${blogURL}/admin/index.html/#/~/:path*`,
       },
     ];
   },
