@@ -2,11 +2,15 @@ const { BLOG_URL } = process.env;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: true,
+  trailingSlash: false,
   async rewrites() {
     return [
       {
         source: "/blog",
+        destination: `${BLOG_URL}/blog`,
+      },
+      {
+        source: "/blog/",
         destination: `${BLOG_URL}/blog`,
       },
       {
